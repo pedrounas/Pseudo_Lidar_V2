@@ -12,10 +12,10 @@ def is_image_file(filename):
 
 
 def dataloader(filepath):
-    filepath += '/'
+    print(filepath)
 
-    monkaa_path = filepath + '/monkaa_cleanpass/'
-    monkaa_disp = filepath + '/monkaa_disparity/'
+    monkaa_path = filepath + 'Monkaa/RGB_cleanpass/'
+    monkaa_disp = filepath + 'Monkaa/disparity/'
 
     monkaa_dir = os.listdir(monkaa_path)
 

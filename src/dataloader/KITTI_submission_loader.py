@@ -34,8 +34,8 @@ def dataloader(filepath, split):
     return left_test, right_test, calib_test
 
 def dynamic_baseline(calib_info):
-    P3 =np.reshape(calib_info['P3'], [3,4])
-    P =np.reshape(calib_info['P2'], [3,4])
+    P3 =np.reshape(calib_info['P_rect_03'], [3,4])
+    P =np.reshape(calib_info['P_rect_02'], [3,4])
     baseline = P3[0,3]/(-P3[0,0]) - P[0,3]/(-P[0,0])
     return baseline
 
@@ -71,9 +71,9 @@ class SubmiteDataset(object):
         right_img = self.right_test[item]
         calib_info = read_calib_file(self.calib_test[item])
         if self.dynamic_bs:
-            calib = np.reshape(calib_info['P2'], [3, 4])[0, 0] * dynamic_baseline(calib_info)
+            calib = np.reshape(calib_info['P_rect_02'], [3, 4])[0, 0] * dynamic_baseline(calib_info)
         else:
-            calib = np.reshape(calib_info['P2'], [3, 4])[0, 0] * 0.54
+            calib = np.reshape(calib_info['P_rect_02'], [3, 4])[0, 0] * 0.54
         imgL = Image.open(left_img).convert('RGB')
         imgR = Image.open(right_img).convert('RGB')
         imgL = self.trans(imgL)[None, :, :, :]

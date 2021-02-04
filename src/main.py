@@ -189,7 +189,7 @@ def main():
             start_time = time.time()
             test(imgL_crop, imgR_crop, disp_crop_L, calib, evaluate_metric, model)
 
-            log.info(evaluate_metric.print(batch_idx, 'EVALUATE') + ' Time:{:.3f}'.format(time.time() - start_time))
+            # log.info(evaluate_metric.print(batch_idx, 'EVALUATE') + ' Time:{:.3f}'.format(time.time() - start_time))
         import sys
         sys.exit()
 

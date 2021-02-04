@@ -29,6 +29,7 @@ if __name__ == '__main__':
     parser.add_argument('--split_file', type=str, default='~/Kitti/object/train.txt')
     args = parser.parse_args()
 
+    print(args.data_path)
     assert os.path.isdir(args.data_path)
     lidar_dir = args.data_path + '/velodyne/'
     calib_dir = args.data_path + '/calib/'

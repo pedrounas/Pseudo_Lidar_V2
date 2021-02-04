@@ -47,8 +47,8 @@ def kitti2015_disparity_loader(filepath, calib):
 
 
 def dynamic_baseline(calib_info):
-    P3 =np.reshape(calib_info['P3'], [3,4])
-    P =np.reshape(calib_info['P2'], [3,4])
+    P3 =np.reshape(calib_info['P_rect_03'], [3,4])
+    P =np.reshape(calib_info['P_rect_02'], [3,4])
     baseline = P3[0,3]/(-P3[0,0]) - P[0,3]/(-P[0,0])
     return baseline
 
@@ -77,9 +77,9 @@ class myImageFloder(data.Dataset):
         depth = self.depth[index]
         calib_info = read_calib_file(self.calib[index])
         if self.dynamic_bs:
-            calib = np.reshape(calib_info['P2'], [3, 4])[0, 0] * dynamic_baseline(calib_info)
+            calib = np.reshape(calib_info['P_rect_02'], [3, 4])[0, 0] * dynamic_baseline(calib_info)
         else:
-            calib = np.reshape(calib_info['P2'], [3, 4])[0, 0] * 0.54
+            calib = np.reshape(calib_info['P_rect_02'], [3, 4])[0, 0] * 0.54
 
         left_img = self.loader(left)
         right_img = self.loader(right)

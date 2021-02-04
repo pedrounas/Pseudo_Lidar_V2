@@ -87,7 +87,7 @@ class Calibration(object):
         else:
             calibs = self.read_calib_file(calib_filepath)
         # Projection matrix from rect camera coord to image2 coord
-        self.P = calibs['P2']
+        self.P = calibs['P_rect_02']
         self.P = np.reshape(self.P, [3,4])
 
         # Rigid transform from Velodyne coord to reference camera coord
@@ -99,7 +99,7 @@ class Calibration(object):
         self.R0 = np.reshape(self.R0,[3,3])
 
         # Camera intrinsics and extrinsics
-        self.P3 =np.reshape(calibs['P3'], [3,4])
+        self.P3 =np.reshape(calibs['P_rect_03'], [3,4])
         self.c_u = self.P[0,2]
         self.c_v = self.P[1,2]
         self.f_u = self.P[0,0]
@@ -139,7 +139,7 @@ class Calibration(object):
         Tr_velo_to_cam[:,3] = velo2cam['T']
         data['Tr_velo_to_cam'] = np.reshape(Tr_velo_to_cam, [12])
         data['R0_rect'] = cam2cam['R_rect_00']
-        data['P2'] = cam2cam['P_rect_02']
+        data['P_rect_02'] = cam2cam['P_rect_02']
         return data
 
     def cart2hom(self, pts_3d):
